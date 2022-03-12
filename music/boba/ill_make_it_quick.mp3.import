@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ill_make_it_quick.mp3-6f2a420c72e448c143f026d6a3f91ab8.mp3str"
+
+[deps]
+
+source_file="res://music/boba/ill_make_it_quick.mp3"
+dest_files=[ "res://.import/ill_make_it_quick.mp3-6f2a420c72e448c143f026d6a3f91ab8.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

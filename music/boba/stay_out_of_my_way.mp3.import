@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/stay_out_of_my_way.mp3-729bb94a2e900e21940b5e3538e3350d.mp3str"
+
+[deps]
+
+source_file="res://music/boba/stay_out_of_my_way.mp3"
+dest_files=[ "res://.import/stay_out_of_my_way.mp3-729bb94a2e900e21940b5e3538e3350d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

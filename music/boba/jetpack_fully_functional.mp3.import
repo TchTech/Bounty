@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/jetpack_fully_functional.mp3-ccd7b851d647dc868944ec32b5e1a0de.mp3str"
+
+[deps]
+
+source_file="res://music/boba/jetpack_fully_functional.mp3"
+dest_files=[ "res://.import/jetpack_fully_functional.mp3-ccd7b851d647dc868944ec32b5e1a0de.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

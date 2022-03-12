@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/bring_out_your_best.mp3-1014410ca4e45d80b259caf4109d2017.mp3str"
+
+[deps]
+
+source_file="res://music/boba/bring_out_your_best.mp3"
+dest_files=[ "res://.import/bring_out_your_best.mp3-1014410ca4e45d80b259caf4109d2017.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/burn_it_all.mp3-63c19d373da8c93ea4372709634985a6.mp3str"
+
+[deps]
+
+source_file="res://music/boba/burn_it_all.mp3"
+dest_files=[ "res://.import/burn_it_all.mp3-63c19d373da8c93ea4372709634985a6.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

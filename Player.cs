@@ -5,9 +5,12 @@ using System.Diagnostics;
 public class Player : KinematicBody2D
 {
 	private const int jump_acceleration_default = 800;
+	private CPUParticles2D jetpack_particles;
 	private PackedScene bulletScene;
+	private PackedScene bombScene;
 	private int last_direction = 1;
-	private AnimatedSprite _animatedSprite;
+	private AnimatedSprite animatedSprite;
+	private ProgressBar progressBar;
 	private int jump_acceleration = jump_acceleration_default;
 	private int speed = 500;
 	private int gravity = 9000;
@@ -18,14 +21,27 @@ public class Player : KinematicBody2D
 	private Stopwatch jetpack_timer;
 	private Stopwatch stand_timer;
 	private Stopwatch shot_timer;
+	private Stopwatch bomb_timer;
+	private AudioStreamPlayer2D blasterSound;
+	private AudioStreamPlayer2D jetpackSound;
+	private AudioStreamPlayer2D JetpackFullyFunctional;
 	public override void _Ready()
 	{
 		
 		bulletScene = GD.Load<PackedScene>("res://Bullet.tscn");
+		bombScene = GD.Load<PackedScene>("res://Bomb.tscn");
 		stand_timer = new Stopwatch();
 		jetpack_timer = new Stopwatch();
 		shot_timer = new Stopwatch();
-		_animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+		bomb_timer = new Stopwatch();
+		jetpack_particles = GetNode<CPUParticles2D>("CPUParticles2D");
+		animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+		progressBar = GetNode<ProgressBar>("Fuel");
+		blasterSound = GetNode<AudioStreamPlayer2D>("BlasterSound");
+		jetpackSound = GetNode<AudioStreamPlayer2D>("JetpackSound");
+		JetpackFullyFunctional = GetNode<AudioStreamPlayer2D>("JetpackFullyFunctional");
+		progressBar.Value = fuel;
+		jetpack_particles.Visible = false;
 	}
  public override void _Process(float delta)
  {
@@ -44,33 +60,51 @@ public class Player : KinematicBody2D
 		}else{
 			velocity.x = Mathf.Lerp(velocity.x, 0, friction);
 		}
-		if(Input.IsActionPressed("jump") && jetpack_timer.Elapsed.TotalMilliseconds<1){
+		if(Input.IsActionPressed("jump") && fuel>0){
+				jetpack_timer.Reset();
+				jetpack_timer.Stop();
 				velocity.y -= jump_acceleration;
-				if(jump_acceleration>0){
+				jetpack_timer.Start();
+				if (jump_acceleration>0){
 					jump_acceleration -= jump_acceleration/20;
 				}
 				if(fuel>0){fuel -= 1;}
 		}else{
 				velocity.y += gravity * delta;
 		}
-		if(fuel==0){
-			jetpack_timer.Start();
-			if(jetpack_timer.Elapsed.TotalMilliseconds>3000){
-				jetpack_timer.Reset();
-				jetpack_timer.Stop();
-				jump_acceleration = jump_acceleration_default;
-				fuel = 100;
+		if(jetpack_timer.Elapsed.TotalMilliseconds>3000 && fuel == 0){
+			jump_acceleration = jump_acceleration_default;
+			fuel = 20;
+		}else if(jetpack_timer.Elapsed.TotalMilliseconds>3000 && fuel<100){
+			jump_acceleration = jump_acceleration_default;
+			fuel += 1;
+			if(fuel == 100){
+				JetpackFullyFunctional.Play();
 			}
 		}
 	 }
-	 if(Input.IsActionPressed("shot") && IsOnFloor() && shot_timer.Elapsed.Milliseconds==0){
+	if (Input.IsActionPressed("bomb") && !bomb_timer.IsRunning) {
+			Bomb bomb = (Bomb)bombScene.Instance();
+			bomb.Position = new Vector2(animatedSprite.Position.x + (70 * last_direction), animatedSprite.Position.y);
+			if (last_direction == 1) bomb.Rotation = Mathf.Deg2Rad(0);
+			else bomb.Rotation = Mathf.Deg2Rad(180);
+			this.AddChild(bomb);
+			bomb.LaunchBomb();
+			bomb_timer.Start();
+	}else if (bomb_timer.Elapsed.Seconds > 5)
+		{
+			bomb_timer.Reset();
+			bomb_timer.Stop();
+		}
+	 if(Input.IsActionPressed("shot") && shot_timer.Elapsed.Milliseconds==0){
 		 
 		 Bullet bullet = (Bullet)bulletScene.Instance();
-		 bullet.Position = new Vector2(_animatedSprite.Position.x+(35*last_direction), _animatedSprite.Position.y-1);
+		 bullet.Position = new Vector2(animatedSprite.Position.x+(35*last_direction), animatedSprite.Position.y-1-(Convert.ToInt32(!IsOnFloor()) * 10));
 		 if(last_direction==1) bullet.Rotation = Mathf.Deg2Rad(0);
 		 else bullet.Rotation = Mathf.Deg2Rad(180);
 		 this.AddChild(bullet);
 		 bullet.LaunchBullet();
+		 blasterSound.Play();
 		 shot_timer.Start();
 		 is_shot = true;
 	 }else if(shot_timer.Elapsed.Milliseconds>400){
@@ -79,31 +113,48 @@ public class Player : KinematicBody2D
 		 is_shot = false;
 	 }
 	if(last_direction == -1){
-		_animatedSprite.FlipH = true;
+		animatedSprite.FlipH = true;
 	}else{
-		_animatedSprite.FlipH = false;
+		animatedSprite.FlipH = false;
 	}
 	if(!IsOnFloor()){
-		_animatedSprite.Play("Fly");
+		if(is_shot){
+			animatedSprite.Play("FlyShot");
+		}else{
+			animatedSprite.Play("Fly");
+		}
+		if(last_direction == 1){
+			jetpack_particles.RotationDegrees = 10;
+		}else{
+			jetpack_particles.RotationDegrees = -10;
+		}
+		jetpack_particles.Visible = true;
+		if(!jetpackSound.Playing){
+			jetpackSound.Play();
+		}
 		stand_timer.Reset();
 		stand_timer.Stop();
 	}else if(IsOnFloor()&&direction!=0){
-		_animatedSprite.Play("Run");
+		animatedSprite.Play("Run");
 		stand_timer.Reset();
 		stand_timer.Stop();
+		jetpack_particles.Visible = false;
+		jetpackSound.Stop();
 	}else{
 		if(stand_timer.Elapsed.Seconds>5 && !is_shot){
-			_animatedSprite.Play("Stand");
+			animatedSprite.Play("Stand");
 		}else if(is_shot){
-			_animatedSprite.Play("Shot");
+			animatedSprite.Play("Shot");
 		}else{
-			_animatedSprite.Play("Idle");
+			animatedSprite.Play("Idle");
 		}
 		if(stand_timer.Elapsed.Milliseconds == 0){
 			stand_timer.Start();
 		}
+		jetpack_particles.Visible = false;
+		jetpackSound.Stop();
 	}
-	
+	progressBar.Value = fuel;
 	MoveAndSlide(velocity, Vector2.Up);
  }
 }

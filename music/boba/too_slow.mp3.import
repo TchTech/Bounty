@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/too_slow.mp3-999bf0c5d8ecfc0f6e917d9d85ac4a51.mp3str"
+
+[deps]
+
+source_file="res://music/boba/too_slow.mp3"
+dest_files=[ "res://.import/too_slow.mp3-999bf0c5d8ecfc0f6e917d9d85ac4a51.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

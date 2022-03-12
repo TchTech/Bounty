@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/challenge_me.mp3-2e8e4506ebc1cb05173b7c2d3a2297f7.mp3str"
+
+[deps]
+
+source_file="res://music/boba/challenge_me.mp3"
+dest_files=[ "res://.import/challenge_me.mp3-2e8e4506ebc1cb05173b7c2d3a2297f7.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/let_me_work.mp3-f1de2e3bd1aee9668a0c0ee0e31133a9.mp3str"
+
+[deps]
+
+source_file="res://music/boba/let_me_work.mp3"
+dest_files=[ "res://.import/let_me_work.mp3-f1de2e3bd1aee9668a0c0ee0e31133a9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

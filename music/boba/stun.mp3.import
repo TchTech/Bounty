@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/stun.mp3-1770342d34eba378cea8be4113bb02c7.mp3str"
+
+[deps]
+
+source_file="res://music/boba/stun.mp3"
+dest_files=[ "res://.import/stun.mp3-1770342d34eba378cea8be4113bb02c7.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

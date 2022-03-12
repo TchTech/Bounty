@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/blaster.mp3-1341fb86972d86fe686611f8cf7d938b.mp3str"
+
+[deps]
+
+source_file="res://music/blaster.mp3"
+dest_files=[ "res://.import/blaster.mp3-1341fb86972d86fe686611f8cf7d938b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
