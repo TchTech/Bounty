@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/i_know_what_you_are_planning.mp3-e32e8f2c6e9afbab2022d5c16b345d8f.mp3str"
+
+[deps]
+
+source_file="res://music/boba/i_know_what_you_are_planning.mp3"
+dest_files=[ "res://.import/i_know_what_you_are_planning.mp3-e32e8f2c6e9afbab2022d5c16b345d8f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

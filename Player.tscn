@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Player.cs" type="Script" id=1]
 [ext_resource path="res://sprites/boba sprites/go1_player.png" type="Texture" id=2]
@@ -32,6 +32,11 @@ animations = [ {
 "name": "FlyShot",
 "speed": 12.0
 }, {
+"frames": [ ExtResource( 15 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "Shot",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "Stand",
@@ -41,11 +46,6 @@ animations = [ {
 "loop": true,
 "name": "Fier",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 15 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 14 ) ],
-"loop": false,
-"name": "Shot",
-"speed": 12.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 16 ), ExtResource( 11 ) ],
 "loop": true,
@@ -72,8 +72,10 @@ bg_color = Color( 0.639216, 0.611765, 0.101961, 1 )
 color = Color( 0.470588, 0.443137, 0.356863, 1 )
 
 [sub_resource type="Gradient" id=12]
-offsets = PoolRealArray( 0 )
-colors = PoolColorArray( 0.703125, 0.689035, 0.563049, 1 )
+colors = PoolColorArray( 1, 0.03125, 0.03125, 1, 1, 0.587631, 0.0820313, 1 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.529412, 0.113725, 0.113725, 1 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -83,6 +85,8 @@ position = Vector2( -1.625, 0.75 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 0, -60 )
+scale = Vector2( 0.634522, 0.933531 )
 current = true
 zoom = Vector2( 0.6, 0.6 )
 
@@ -96,10 +100,10 @@ frame = 2
 playing = true
 
 [node name="Fuel" type="ProgressBar" parent="."]
-margin_left = 220.0
-margin_top = 150.0
-margin_right = 290.0
-margin_bottom = 165.0
+margin_left = 219.0
+margin_top = -215.0
+margin_right = 289.0
+margin_bottom = -200.0
 theme = SubResource( 9 )
 custom_styles/fg = SubResource( 10 )
 custom_styles/bg = SubResource( 11 )
@@ -109,27 +113,37 @@ __meta__ = {
 }
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2( -3, 27 )
+position = Vector2( -7, 23 )
 amount = 50
 emission_shape = 2
-emission_rect_extents = Vector2( 25, 10 )
+emission_rect_extents = Vector2( 30, 15 )
 spread = 0.0
 gravity = Vector2( 0, 350 )
-orbit_velocity_random = 1.0
-linear_accel = -100.0
-tangential_accel = 100.0
-tangential_accel_random = 1.0
+initial_velocity_random = 1.0
 damping = 100.0
+angle = 45.0
 scale_amount = 1.5
 scale_amount_random = 1.0
 color_ramp = SubResource( 12 )
-
-[node name="BlasterSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 19 )
-max_distance = 5.0
 
 [node name="JetpackSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 20 )
 
 [node name="JetpackFullyFunctional" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 21 )
+
+[node name="BlasterSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 19 )
+
+[node name="Health" type="ProgressBar" parent="."]
+margin_left = 126.0
+margin_top = -215.0
+margin_right = 196.0
+margin_bottom = -200.0
+theme = SubResource( 9 )
+custom_styles/fg = SubResource( 13 )
+custom_styles/bg = SubResource( 11 )
+value = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public class Player : KinematicBody2D
+public class Player : Playable
 {
 	private const int jump_acceleration_default = 800;
 	private CPUParticles2D jetpack_particles;
@@ -10,7 +10,8 @@ public class Player : KinematicBody2D
 	private PackedScene bombScene;
 	private int last_direction = 1;
 	private AnimatedSprite animatedSprite;
-	private ProgressBar progressBar;
+	private ProgressBar progBarFuel;
+	private ProgressBar progBarHealth;
 	private int jump_acceleration = jump_acceleration_default;
 	private int speed = 500;
 	private int gravity = 9000;
@@ -36,12 +37,15 @@ public class Player : KinematicBody2D
 		bomb_timer = new Stopwatch();
 		jetpack_particles = GetNode<CPUParticles2D>("CPUParticles2D");
 		animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
-		progressBar = GetNode<ProgressBar>("Fuel");
+		progBarFuel = GetNode<ProgressBar>("Fuel");
+		progBarHealth = GetNode<ProgressBar>("Health");
 		blasterSound = GetNode<AudioStreamPlayer2D>("BlasterSound");
 		jetpackSound = GetNode<AudioStreamPlayer2D>("JetpackSound");
 		JetpackFullyFunctional = GetNode<AudioStreamPlayer2D>("JetpackFullyFunctional");
-		progressBar.Value = fuel;
+		progBarFuel.Value = fuel;
+		progBarHealth.Value = health;
 		jetpack_particles.Visible = false;
+		health = 100;
 	}
  public override void _Process(float delta)
  {
@@ -154,7 +158,8 @@ public class Player : KinematicBody2D
 		jetpack_particles.Visible = false;
 		jetpackSound.Stop();
 	}
-	progressBar.Value = fuel;
+	progBarFuel.Value = fuel;
+	progBarHealth.Value = health;
 	MoveAndSlide(velocity, Vector2.Up);
  }
 }
