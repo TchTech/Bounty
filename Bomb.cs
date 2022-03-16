@@ -8,11 +8,18 @@ public class Bomb : RigidBody2D
 	private CPUParticles2D bombParticles;
 	private CPUParticles2D explParticles;
 	private AudioStreamPlayer2D explSound;
+	//private Playable[] goals;
+	//private List<Playable> g;
 	public float MaxSeconds = 1.5f;
 	public float ImpulseMag = 160;
 	//private Vector2 originalPos;
 	public override void _Ready()
 	{
+		//goals = new [10]Playable;
+		//g = new List<Playable>();
+		
+		//g.Add(new Player);
+		
 		explSound = GetNode<AudioStreamPlayer2D>("ExplSound");
 		animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
 		sprite = GetNode<Sprite>("Sprite");
@@ -24,6 +31,11 @@ public class Bomb : RigidBody2D
 	private void Destroy(){
 		this.QueueFree();
 	}
+	// public void _on_Area2D_body_entered(object other){
+	// 	if(other is Playable){
+	// 		//goals.Append other as Player;
+	// 	}
+	// }
 	private void OnTimeToDie(){
 		Sleeping = true;
 		bombParticles.Visible = false;

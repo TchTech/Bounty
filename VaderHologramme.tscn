@@ -6,6 +6,11 @@
 [ext_resource path="res://sprites/whitevader.png" type="Texture" id=4]
 [ext_resource path="res://sprites/vader.png" type="Texture" id=5]
 
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 112, 0, 16, 24 )
+
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 1 )
@@ -31,13 +36,13 @@ flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 80, 48, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=6]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 112, 0, 16, 24 )
-
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
+"frames": [ SubResource( 6 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "Hurt",
@@ -49,14 +54,9 @@ animations = [ {
 "speed": 5.0
 }, {
 "frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
+"loop": false,
 "name": "Attack",
 "speed": 8.0
-}, {
-"frames": [ SubResource( 6 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=8]
@@ -107,6 +107,15 @@ spread = 0.0
 initial_velocity = 633.03
 orbit_velocity = 3.0
 scale_amount = 2.0
+color = Color( 1, 0, 0, 1 )
+
+[node name="DeadParticles" type="CPUParticles2D" parent="."]
+visible = false
+amount = 35
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+initial_velocity = 100.0
 color = Color( 1, 0, 0, 1 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

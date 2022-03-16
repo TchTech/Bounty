@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://sprites/bomb.png" type="Texture" id=1]
 [ext_resource path="res://Bomb.cs" type="Script" id=2]
@@ -20,6 +20,9 @@ animations = [ {
 
 [sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 0.506836, 0, 1, 0, 0, 0, 1 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 29.0172
 
 [node name="RigidBody2D" type="RigidBody2D"]
 contacts_reported = 5
@@ -64,3 +67,8 @@ color_ramp = SubResource( 3 )
 
 [node name="ExplSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 4 )

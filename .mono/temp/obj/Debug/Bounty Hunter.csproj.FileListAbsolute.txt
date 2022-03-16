@@ -16,3 +16,12 @@ C:\Users\User\Desktop\Bounty\.mono\temp\obj\Debug\Bounty Hunter.AssemblyInfo.cs
 C:\Users\User\Desktop\Bounty\.mono\temp\obj\Debug\Bounty Hunter.csproj.CoreCompileInputs.cache
 C:\Users\User\Desktop\Bounty\.mono\temp\obj\Debug\Bounty Hunter.dll
 C:\Users\User\Desktop\Bounty\.mono\temp\obj\Debug\Bounty Hunter.pdb
+C:\Users\User\Desktop\Bounty-main\.mono\temp\bin\Debug\Bounty Hunter.dll
+C:\Users\User\Desktop\Bounty-main\.mono\temp\bin\Debug\Bounty Hunter.pdb
+C:\Users\User\Desktop\Bounty-main\.mono\temp\obj\Debug\Bounty Hunter.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Bounty-main\.mono\temp\obj\Debug\Bounty Hunter.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\Bounty-main\.mono\temp\obj\Debug\Bounty Hunter.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Bounty-main\.mono\temp\obj\Debug\Bounty Hunter.AssemblyInfo.cs
+C:\Users\User\Desktop\Bounty-main\.mono\temp\obj\Debug\Bounty Hunter.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Bounty-main\.mono\temp\obj\Debug\Bounty Hunter.dll
+C:\Users\User\Desktop\Bounty-main\.mono\temp\obj\Debug\Bounty Hunter.pdb

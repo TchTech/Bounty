@@ -6,14 +6,17 @@ public class VaderHologramme : Playable
 	private int run_speed = 150;
 	private Vector2 velocity;
 	private Player player;
+	private PackedScene deadScene;
 	private AnimatedSprite animatedSprite;
 	private CPUParticles2D redParticles;
 	private bool allow_go = true;
 	private bool allow_attack = true;
+	private CPUParticles2D particles;
 	public override void _Ready()
 	{
 		animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
 		redParticles = GetNode<CPUParticles2D>("RedParticles");
+		deadScene = GD.Load<PackedScene>("res://DeadParticles.tscn");
 		redParticles.Visible = false;
 		health = 100;
 	}
@@ -23,7 +26,7 @@ public class VaderHologramme : Playable
 		if(Math.Abs(player.Position.x - Position.x) > 50 && allow_go){
 			velocity = Position.DirectionTo(player.Position) * run_speed;
 			animatedSprite.Play("Go");
-		}else if(allow_go){
+		}else if(allow_attack){
 			Timer timer = new Timer();
 			this.AddChild(timer);
 			timer.WaitTime = 0.5f;
@@ -35,6 +38,9 @@ public class VaderHologramme : Playable
 			animatedSprite.FlipH = false;
 		}else{
 			animatedSprite.FlipH = true;
+		}
+		if(velocity.x == 0 && allow_attack && allow_go){
+			animatedSprite.Play("Idle");
 		}
 		}catch{
 			Console.WriteLine("fff");
@@ -51,10 +57,31 @@ public class VaderHologramme : Playable
 	public void _on_Area2D_body_exited(Area2D other){
 		player = new Player();
 	}
-	public void Die(){}
+	
+	public override void Die(){
+		animatedSprite.Visible = false;
+		redParticles.Visible = false;
+		GetNode<CollisionShape2D>("CollisionShape2D").OneWayCollision = true;
+		GetNode<CPUParticles2D>("CPUParticles2D").Visible = false;
+		GetNode<CPUParticles2D>("RedParticles").Visible = false;
+		GetNode<Area2D>("Area2D").Visible = false;
+		particles = (CPUParticles2D)deadScene.Instance();
+		particles.Position = animatedSprite.Position;
+		particles.Visible = true;
+		this.AddChild(particles);
+		Timer timer = new Timer();
+		this.AddChild(timer);
+		timer.WaitTime = 2.5f;
+		timer.OneShot = true;
+		timer.Connect("timeout", this, nameof(DestroyParticles));
+		timer.Start();
+	}
+	public void DestroyParticles(){
+		QueueFree();
+	}
 	public void Attack(){
 		if(allow_attack && Math.Abs(player.Position.y - Position.y)<50 && Math.Abs(player.Position.x - Position.x) < 50){
-			player.Hurt(2);
+			player.Hurt(30);
 			animatedSprite.Play("Attack");
 			redParticles.Visible = true;
 		}
@@ -72,7 +99,7 @@ public class VaderHologramme : Playable
 		allow_go = false;
 		Timer timer = new Timer();
 		this.AddChild(timer);
-		timer.WaitTime = 1.5f;
+		timer.WaitTime = 0.5f;
 		timer.OneShot = true;
 		timer.Connect("timeout", this, nameof(SwitchGoing));
 		timer.Start();
