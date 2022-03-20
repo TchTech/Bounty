@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/you_will_know_the_power.wav-baadd72b7fefa8c6de1a0afa80ac318d.sample"
+
+[deps]
+
+source_file="res://music/you_will_know_the_power.wav"
+dest_files=[ "res://.import/you_will_know_the_power.wav-baadd72b7fefa8c6de1a0afa80ac318d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -18,6 +18,8 @@ public class Player : Playable
 	private float friction = .2f;
 	private float acceleration = .35f;
 	private double fuel = 100;
+	private bool is_stunned = false;
+	public bool Stun{get=>is_stunned; set=>is_stunned=value;}
 	private bool is_shot = false; 
 	private Stopwatch jetpack_timer;
 	private Stopwatch stand_timer;
@@ -89,7 +91,7 @@ public class Player : Playable
 	 }
 	if (Input.IsActionPressed("bomb") && !bomb_timer.IsRunning) {
 			Bomb bomb = (Bomb)bombScene.Instance();
-			bomb.Position = new Vector2(animatedSprite.Position.x + (70 * last_direction), animatedSprite.Position.y);
+			bomb.Position = new Vector2(animatedSprite.Position.x + (40 * last_direction), animatedSprite.Position.y+2);
 			if (last_direction == 1) bomb.Rotation = Mathf.Deg2Rad(0);
 			else bomb.Rotation = Mathf.Deg2Rad(180);
 			this.AddChild(bomb);
@@ -111,6 +113,9 @@ public class Player : Playable
 		 blasterSound.Play();
 		 shot_timer.Start();
 		 is_shot = true;
+		 if(new Random().Next(0, 10) == 1){
+			GetNode<AudioStreamPlayer2D>("comeCloserSound").Play();
+		 }
 	 }else if(shot_timer.Elapsed.Milliseconds>400){
 		 shot_timer.Reset();
 		 shot_timer.Stop();
@@ -160,6 +165,15 @@ public class Player : Playable
 	}
 	progBarFuel.Value = fuel;
 	progBarHealth.Value = health;
+	if(is_stunned){
+		velocity = Vector2.Zero;
+		velocity.y += gravity * delta * 10;
+	}
 	MoveAndSlide(velocity, Vector2.Up);
  }
+    public override void Hurt(int damage)
+    {
+        base.Hurt(damage);
+		GetNode<AudioStreamPlayer2D>("damagedSound").Play();
+    }
 }

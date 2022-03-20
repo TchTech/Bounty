@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/sf_buzz_electric.mp3-738f121a1bdc2abda2874e4d62466ef8.mp3str"
+
+[deps]
+
+source_file="res://music/sf_buzz_electric.mp3"
+dest_files=[ "res://.import/sf_buzz_electric.mp3-738f121a1bdc2abda2874e4d62466ef8.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/damaged.mp3-306e9fb2f544cf28737e746768c1c6f4.mp3str"
+
+[deps]
+
+source_file="res://music/boba/damaged.mp3"
+dest_files=[ "res://.import/damaged.mp3-306e9fb2f544cf28737e746768c1c6f4.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

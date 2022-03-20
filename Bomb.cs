@@ -8,10 +8,11 @@ public class Bomb : RigidBody2D
 	private CPUParticles2D bombParticles;
 	private CPUParticles2D explParticles;
 	private AudioStreamPlayer2D explSound;
+	private PackedScene boomScene;
 	//private Playable[] goals;
 	//private List<Playable> g;
 	public float MaxSeconds = 1.5f;
-	public float ImpulseMag = 160;
+	public float ImpulseMag = 200;
 	//private Vector2 originalPos;
 	public override void _Ready()
 	{
@@ -21,11 +22,12 @@ public class Bomb : RigidBody2D
 		//g.Add(new Player);
 		
 		explSound = GetNode<AudioStreamPlayer2D>("ExplSound");
-		animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+		//animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+		boomScene = GD.Load<PackedScene>("res://Boom.tscn");
 		sprite = GetNode<Sprite>("Sprite");
-		explParticles = GetNode<CPUParticles2D>("ExplCPUParticles2D");
+		//explParticles = GetNode<CPUParticles2D>("ExplCPUParticles2D");
 		bombParticles = GetNode<CPUParticles2D>("BombCPUParticles2D");
-		explParticles.Visible = false;
+		//explParticles.Visible = false;
 		bombParticles.Visible = true;
 	}
 	private void Destroy(){
@@ -39,10 +41,10 @@ public class Bomb : RigidBody2D
 	private void OnTimeToDie(){
 		Sleeping = true;
 		bombParticles.Visible = false;
-		explParticles.Visible = true;
+		//explParticles.Visible = true;
 		sprite.Visible = false;
-		animatedSprite.Visible = true;
-		animatedSprite.Play("Explosion");
+		var boom = boomScene.Instance();
+		AddChild(boom);
 		if(!explSound.Playing){
 			explSound.Play();
 		}

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/battle_of_the_fates.mp3-8cabecbd495a9346ac0a4c44c9738a1f.mp3str"
+
+[deps]
+
+source_file="res://music/battle_of_the_fates.mp3"
+dest_files=[ "res://.import/battle_of_the_fates.mp3-8cabecbd495a9346ac0a4c44c9738a1f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

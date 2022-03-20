@@ -1,15 +1,14 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://sprites/Без названия.png" type="Texture" id=1]
 [ext_resource path="res://VaderHologramme.cs" type="Script" id=2]
 [ext_resource path="res://sprites/redvader.png" type="Texture" id=3]
 [ext_resource path="res://sprites/whitevader.png" type="Texture" id=4]
 [ext_resource path="res://sprites/vader.png" type="Texture" id=5]
-
-[sub_resource type="AtlasTexture" id=6]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 112, 0, 16, 24 )
+[ext_resource path="res://music/sf_buzz_electric.mp3" type="AudioStream" id=6]
+[ext_resource path="res://music/you_will_know_the_power.wav" type="AudioStream" id=7]
+[ext_resource path="res://music/lightsaber.wav" type="AudioStream" id=8]
+[ext_resource path="res://music/no_escape.wav" type="AudioStream" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -20,6 +19,21 @@ region = Rect2( 96, 0, 16, 24 )
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 24, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 112, 0, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 48, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 16, 48, 16, 24 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
@@ -38,32 +52,51 @@ region = Rect2( 80, 48, 16, 24 )
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ SubResource( 6 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "Hurt",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
 "name": "Go",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 6 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "Stun",
+"speed": 7.0
+}, {
 "frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": false,
 "name": "Attack",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "Hurt",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 19, 24 )
+extents = Vector2( 17.5, 24.5 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 179.5, 164 )
+extents = Vector2( 265.75, 164 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0, 1, 1, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.278431, 0.133333, 0.133333, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -76,7 +109,7 @@ animation = "Idle"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 4, -1 )
+position = Vector2( 2.5, -0.5 )
 shape = SubResource( 8 )
 one_way_collision_margin = 0.0
 
@@ -95,6 +128,7 @@ color = Color( 0.472656, 0.830117, 1, 1 )
 priority = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 1, 0 )
 shape = SubResource( 9 )
 
 [node name="RedParticles" type="CPUParticles2D" parent="."]
@@ -109,13 +143,34 @@ orbit_velocity = 3.0
 scale_amount = 2.0
 color = Color( 1, 0, 0, 1 )
 
-[node name="DeadParticles" type="CPUParticles2D" parent="."]
-visible = false
-amount = 35
-emission_shape = 1
-emission_sphere_radius = 1.0
-spread = 180.0
-initial_velocity = 100.0
-color = Color( 1, 0, 0, 1 )
+[node name="deadsound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = 5.0
+
+[node name="lightsabersound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = 5.0
+
+[node name="youwillknowthepower" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+
+[node name="noescape" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = 5.0
+
+[node name="Health" type="ProgressBar" parent="."]
+margin_left = -20.0
+margin_top = -34.0
+margin_right = 24.0
+margin_bottom = -28.0
+rect_clip_content = true
+custom_styles/fg = SubResource( 12 )
+custom_styles/bg = SubResource( 13 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

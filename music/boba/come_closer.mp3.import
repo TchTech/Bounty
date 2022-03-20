@@ -11,5 +11,5 @@ dest_files=[ "res://.import/come_closer.mp3-631c1943ddbce3d679574859071e7af3.mp3
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
