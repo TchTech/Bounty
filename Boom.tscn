@@ -13,7 +13,7 @@ animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "Explosion",
-"speed": 10.0
+"speed": 12.0
 } ]
 
 [sub_resource type="Gradient" id=3]
@@ -21,7 +21,7 @@ colors = PoolColorArray( 1, 0.506836, 0, 1, 0, 0, 0, 1 )
 
 [sub_resource type="CircleShape2D" id=4]
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="Boom" type="RigidBody2D"]
 contacts_reported = 10
 contact_monitor = true
 script = ExtResource( 4 )
@@ -36,7 +36,7 @@ position = Vector2( -1.90735e-06, -1.90735e-06 )
 scale = Vector2( 1.33158, 1.31136 )
 frames = SubResource( 2 )
 animation = "Explosion"
-frame = 3
+frame = 4
 playing = true
 
 [node name="ExplCPUParticles2D" type="CPUParticles2D" parent="Area2D"]

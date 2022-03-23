@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Player.cs" type="Script" id=1]
 [ext_resource path="res://sprites/boba sprites/go1_player.png" type="Texture" id=2]
@@ -23,37 +23,14 @@
 [ext_resource path="res://music/boba/jetpack_fully_functional.mp3" type="AudioStream" id=21]
 [ext_resource path="res://music/boba/damaged.mp3" type="AudioStream" id=22]
 [ext_resource path="res://music/boba/come_closer.mp3" type="AudioStream" id=23]
+[ext_resource path="res://sprites/rocket-image.png" type="Texture" id=24]
+[ext_resource path="res://sprites/bomb-icon.png" type="Texture" id=25]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.625, 22.25 )
 
 [sub_resource type="SpriteFrames" id=8]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 13 ) ],
-"loop": true,
-"name": "Run",
-"speed": 8.5
-}, {
-"frames": [ ExtResource( 17 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 18 ), ExtResource( 6 ), ExtResource( 3 ) ],
-"loop": false,
-"name": "FlyShot",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 10 ), ExtResource( 16 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "Fly",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 15 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 14 ) ],
-"loop": false,
-"name": "Shot",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "Fier",
@@ -63,6 +40,31 @@ animations = [ {
 "loop": true,
 "name": "Stand",
 "speed": 4.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "Shot",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 16 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "Fly",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 6 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "FlyShot",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "Run",
+"speed": 8.5
+}, {
+"frames": [ ExtResource( 17 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
 } ]
 
 [sub_resource type="Theme" id=9]
@@ -78,6 +80,9 @@ colors = PoolColorArray( 1, 0.03125, 0.03125, 1, 1, 0.587631, 0.0820313, 1 )
 
 [sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.529412, 0.113725, 0.113725, 1 )
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 150, 100 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -156,3 +161,37 @@ stream = ExtResource( 22 )
 [node name="comeCloserSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 23 )
 volume_db = 2.0
+
+[node name="Moneys" type="Label" parent="."]
+margin_left = 42.0
+margin_top = -215.0
+margin_right = 104.0
+margin_bottom = -201.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/line_spacing = 2
+custom_constants/shadow_offset_y = 2
+text = "Credits: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MiniRocketArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MiniRocketArea"]
+position = Vector2( 1, -1 )
+shape = SubResource( 14 )
+
+[node name="MiniRocketTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="MiniRocketImage" type="Sprite" parent="."]
+position = Vector2( 213, -162 )
+scale = Vector2( 1.20678, 1.20678 )
+texture = ExtResource( 24 )
+
+[node name="BombImage" type="Sprite" parent="."]
+position = Vector2( 267, -167 )
+scale = Vector2( 0.2225, 0.2225 )
+texture = ExtResource( 25 )

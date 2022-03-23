@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://music/wristle_rockets.mp3" type="AudioStream" id=1]
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+amount = 50
+explosiveness = 0.5
+spread = 180.0
+initial_velocity = 150.0
+scale_amount = 2.0
+color = Color( 1, 0.94902, 0, 1 )
+hue_variation = 0.1
+hue_variation_random = 1.0
+
+[node name="WristleRockets" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+volume_db = 5.0
+autoplay = true

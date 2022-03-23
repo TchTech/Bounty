@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/wristle_rockets.mp3-730d43d21f4cc6f5f160335f72187bfc.mp3str"
+
+[deps]
+
+source_file="res://music/wristle_rockets.mp3"
+dest_files=[ "res://.import/wristle_rockets.mp3-730d43d21f4cc6f5f160335f72187bfc.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

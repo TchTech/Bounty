@@ -23,6 +23,7 @@ public class VaderHologramme : Playable
 		redParticles.Visible = false;
 		progBarHealth = GetNode<ProgressBar>("Health");
 		health = 100;
+		maxHealth = health;
 		progBarHealth.Visible = false;
 	}
 	public override void _Process(float delta){

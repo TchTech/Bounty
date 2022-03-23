@@ -19,6 +19,7 @@ animations = [ {
 } ]
 
 [node name="RigidBody2D" type="RigidBody2D"]
+position = Vector2( 1, 0 )
 contacts_reported = 5
 contact_monitor = true
 script = ExtResource( 2 )

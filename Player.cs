@@ -13,6 +13,7 @@ public class Player : Playable
 	private ProgressBar progBarFuel;
 	private ProgressBar progBarHealth;
 	private int jump_acceleration = jump_acceleration_default;
+	public int money = 0;
 	private int speed = 500;
 	private int gravity = 9000;
 	private float friction = .2f;
@@ -28,6 +29,9 @@ public class Player : Playable
 	private AudioStreamPlayer2D blasterSound;
 	private AudioStreamPlayer2D jetpackSound;
 	private AudioStreamPlayer2D JetpackFullyFunctional;
+	private Sprite bombImage;
+	private Sprite miniRocketImage;
+	private Timer miniRocketTimer;
 	public override void _Ready()
 	{
 		
@@ -44,10 +48,14 @@ public class Player : Playable
 		blasterSound = GetNode<AudioStreamPlayer2D>("BlasterSound");
 		jetpackSound = GetNode<AudioStreamPlayer2D>("JetpackSound");
 		JetpackFullyFunctional = GetNode<AudioStreamPlayer2D>("JetpackFullyFunctional");
+		bombImage = GetNode<Sprite>("BombImage");
+		miniRocketImage = GetNode<Sprite>("MiniRocketImage");
 		progBarFuel.Value = fuel;
 		progBarHealth.Value = health;
 		jetpack_particles.Visible = false;
 		health = 100;
+		maxHealth = health;
+		miniRocketTimer = GetNode<Timer>("MiniRocketTimer");
 	}
  public override void _Process(float delta)
  {
@@ -78,11 +86,12 @@ public class Player : Playable
 		}else{
 				velocity.y += gravity * delta;
 		}
+		if(IsOnFloor()){
+			jump_acceleration = jump_acceleration_default;
+		}
 		if(jetpack_timer.Elapsed.TotalMilliseconds>3000 && fuel == 0){
-			jump_acceleration = jump_acceleration_default;
-			fuel = 20;
+			fuel = 10;
 		}else if(jetpack_timer.Elapsed.TotalMilliseconds>3000 && fuel<100){
-			jump_acceleration = jump_acceleration_default;
 			fuel += 1;
 			if(fuel == 100){
 				JetpackFullyFunctional.Play();
@@ -102,7 +111,32 @@ public class Player : Playable
 			bomb_timer.Reset();
 			bomb_timer.Stop();
 		}
-	 if(Input.IsActionPressed("shot") && shot_timer.Elapsed.Milliseconds==0){
+	if(bomb_timer.IsRunning){
+		bombImage.Texture = GD.Load<Texture>("res://sprites/bomb-disabled-icon.png");
+	}else{
+		bombImage.Texture = GD.Load<Texture>("res://sprites/bomb-icon.png");
+	}
+
+	if(Input.IsActionPressed("mini_rocket") && miniRocketTimer.TimeLeft==0){
+		var bodies_list = GetNode<Area2D>("MiniRocketArea").GetOverlappingBodies();
+		for(int i = 0; i<bodies_list.Count; i++){
+			if(bodies_list[i] is Playable && !(bodies_list[i] is Player)){
+				var goal = bodies_list[i] as Playable;
+				var miniRocketParticles = (CPUParticles2D)GD.Load<PackedScene>("res://MiniRocketParticles.tscn").Instance();
+				goal.AddChild(miniRocketParticles);
+				miniRocketParticles.OneShot = true;
+				miniRocketParticles.Emitting = true;
+				goal.Hurt(50);
+			}
+		}
+		miniRocketTimer.Start();
+	}
+	if(miniRocketTimer.TimeLeft==0){
+		miniRocketImage.Texture = GD.Load<Texture>("res://sprites/rocket-image.png");
+	}else{
+		miniRocketImage.Texture = GD.Load<Texture>("res://sprites/rocket-disabled-image.png");
+	}
+	if(Input.IsActionPressed("shot") && shot_timer.Elapsed.Milliseconds==0){
 		 
 		 Bullet bullet = (Bullet)bulletScene.Instance();
 		 bullet.Position = new Vector2(animatedSprite.Position.x+(35*last_direction), animatedSprite.Position.y-1-(Convert.ToInt32(!IsOnFloor()) * 10));
@@ -121,6 +155,9 @@ public class Player : Playable
 		 shot_timer.Stop();
 		 is_shot = false;
 	 }
+
+	
+
 	if(last_direction == -1){
 		animatedSprite.FlipH = true;
 	}else{
@@ -150,7 +187,9 @@ public class Player : Playable
 		jetpack_particles.Visible = false;
 		jetpackSound.Stop();
 	}else{
-		if(stand_timer.Elapsed.Seconds>5 && !is_shot){
+		if(Input.IsActionPressed("mini_rocket") || Input.IsActionPressed("bomb")){
+			animatedSprite.Play("Fier");
+		}else if(stand_timer.Elapsed.Seconds>5 && !is_shot){
 			animatedSprite.Play("Stand");
 		}else if(is_shot){
 			animatedSprite.Play("Shot");
@@ -169,11 +208,12 @@ public class Player : Playable
 		velocity = Vector2.Zero;
 		velocity.y += gravity * delta * 10;
 	}
+	GetNode<Label>("Moneys").Text = "Credits: " + Convert.ToString(money);
 	MoveAndSlide(velocity, Vector2.Up);
  }
-    public override void Hurt(int damage)
-    {
-        base.Hurt(damage);
+	public override void Hurt(int damage)
+	{
+		base.Hurt(damage);
 		GetNode<AudioStreamPlayer2D>("damagedSound").Play();
-    }
+	}
 }

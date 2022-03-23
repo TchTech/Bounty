@@ -31,7 +31,8 @@ public class Bomb : RigidBody2D
 		bombParticles.Visible = true;
 	}
 	private void Destroy(){
-		this.QueueFree();
+		QueueFree();
+		GetParent<KinematicBody2D>().GetParent<Node2D>().GetNode<Boom>("Boom").QueueFree();
 	}
 	// public void _on_Area2D_body_entered(object other){
 	// 	if(other is Playable){
@@ -39,12 +40,13 @@ public class Bomb : RigidBody2D
 	// 	}
 	// }
 	private void OnTimeToDie(){
+		Boom boom = (Boom)boomScene.Instance();
+		boom.Position = sprite.GlobalPosition;
+		GetParent<KinematicBody2D>().GetParent<Node2D>().AddChild(boom);
 		Sleeping = true;
 		bombParticles.Visible = false;
 		//explParticles.Visible = true;
 		sprite.Visible = false;
-		var boom = boomScene.Instance();
-		AddChild(boom);
 		if(!explSound.Playing){
 			explSound.Play();
 		}
