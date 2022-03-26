@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Player.cs" type="Script" id=1]
 [ext_resource path="res://sprites/boba sprites/go1_player.png" type="Texture" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://music/boba/come_closer.mp3" type="AudioStream" id=23]
 [ext_resource path="res://sprites/rocket-image.png" type="Texture" id=24]
 [ext_resource path="res://sprites/bomb-icon.png" type="Texture" id=25]
+[ext_resource path="res://music/flamethrowing.mp3" type="AudioStream" id=26]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.625, 22.25 )
@@ -36,25 +37,25 @@ animations = [ {
 "name": "Fier",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 16 ), ExtResource( 11 ) ],
 "loop": true,
-"name": "Stand",
-"speed": 4.0
+"name": "Fly",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 15 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 14 ) ],
 "loop": false,
 "name": "Shot",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 10 ), ExtResource( 16 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "Fly",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 18 ), ExtResource( 6 ), ExtResource( 3 ) ],
 "loop": false,
 "name": "FlyShot",
 "speed": 12.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "Stand",
+"speed": 4.0
 }, {
 "frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 13 ) ],
 "loop": true,
@@ -195,3 +196,15 @@ texture = ExtResource( 24 )
 position = Vector2( 267, -167 )
 scale = Vector2( 0.2225, 0.2225 )
 texture = ExtResource( 25 )
+
+[node name="FlameTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="FlameSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 26 )
+volume_db = 3.0
+
+[node name="RocketTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true

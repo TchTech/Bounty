@@ -18,13 +18,15 @@ public class Player : Playable
 	private int gravity = 9000;
 	private float friction = .2f;
 	private float acceleration = .35f;
-	private double fuel = 100;
+	public double fuel = 100;
 	private bool is_stunned = false;
 	public bool Stun{get=>is_stunned; set=>is_stunned=value;}
 	private bool is_shot = false; 
+	private bool is_jetpack_rocket = false;
 	private Stopwatch jetpack_timer;
 	private Stopwatch stand_timer;
 	private Stopwatch shot_timer;
+	private bool is_flaming = false;
 	private Stopwatch bomb_timer;
 	private AudioStreamPlayer2D blasterSound;
 	private AudioStreamPlayer2D jetpackSound;
@@ -32,6 +34,10 @@ public class Player : Playable
 	private Sprite bombImage;
 	private Sprite miniRocketImage;
 	private Timer miniRocketTimer;
+	private Timer flameTimer;
+	private Timer RocketTimer;
+	private FlameArea flame;
+	private int flameFuel;
 	public override void _Ready()
 	{
 		
@@ -54,10 +60,21 @@ public class Player : Playable
 		progBarHealth.Value = health;
 		jetpack_particles.Visible = false;
 		health = 100;
+		flameFuel = 100;
 		maxHealth = health;
 		miniRocketTimer = GetNode<Timer>("MiniRocketTimer");
+		RocketTimer = GetNode<Timer>("RocketTimer");
+		flameTimer = GetNode<Timer>("FlameTimer");
+		flameTimer.Connect("timeout", this, nameof(turnOffFlame));
 	}
- public override void _Process(float delta)
+
+private void turnOffFlame(){
+	flame.QueueFree();
+	Stun = false;
+	is_flaming = false;
+	GetNode<AudioStreamPlayer2D>("FlameSound").Stop();
+}
+public override void _Process(float delta)
  {
 	 Vector2 velocity = new Vector2();
 	 int direction = 0;
@@ -155,9 +172,32 @@ public class Player : Playable
 		 shot_timer.Stop();
 		 is_shot = false;
 	 }
-
+	if(Input.IsActionPressed("flame") && !is_flaming){
+		flame = (FlameArea)GD.Load<PackedScene>("res://Flame.tscn").Instance();
+		if(last_direction == -1){
+			flame.GetNode<AnimatedSprite>("AnimatedSprite").FlipH = false;
+			flame.GetNode<CPUParticles2D>("CPUParticles2D").Position = new Vector2(74, 2);
+			flame.GetNode<CPUParticles2D>("CPUParticles2D").Rotation = Mathf.Deg2Rad(180);
+		}else{
+			flame.GetNode<AnimatedSprite>("AnimatedSprite").FlipH = true;
+		}
+		flame.Position = new Vector2(animatedSprite.Position.x+(95*last_direction), animatedSprite.Position.y-4);
+		AddChild(flame);
+		Stun = true;
+		flameTimer.Start();
+		is_flaming = true;
+		if(!GetNode<AudioStreamPlayer2D>("FlameSound").Playing) GetNode<AudioStreamPlayer2D>("FlameSound").Play();
+	}
 	
-
+	if(Input.IsActionPressed("jetpack_rocket") && RocketTimer.TimeLeft == 0){
+		JetpackRocket rocket = (JetpackRocket)GD.Load<PackedScene>("res://JetpackRocket.tscn").Instance();
+		rocket.Position = new Vector2(animatedSprite.Position.x+(35*last_direction), animatedSprite.Position.y-1-(Convert.ToInt32(!IsOnFloor()) * 10));
+		if(last_direction==1) rocket.Rotation = Mathf.Deg2Rad(0);
+		else rocket.Rotation = Mathf.Deg2Rad(180);
+		this.AddChild(rocket);
+		rocket.LaunchBullet();
+		RocketTimer.Start();
+	}
 	if(last_direction == -1){
 		animatedSprite.FlipH = true;
 	}else{
@@ -175,11 +215,16 @@ public class Player : Playable
 			jetpack_particles.RotationDegrees = -10;
 		}
 		jetpack_particles.Visible = true;
+		jetpackSound.VolumeDb = (float)fuel/20;
 		if(!jetpackSound.Playing){
 			jetpackSound.Play();
 		}
 		stand_timer.Reset();
 		stand_timer.Stop();
+	}else if(Input.IsActionPressed("flame")){
+		animatedSprite.Play("Fier");
+		jetpack_particles.Visible = false;
+		jetpackSound.Stop();
 	}else if(IsOnFloor()&&direction!=0){
 		animatedSprite.Play("Run");
 		stand_timer.Reset();

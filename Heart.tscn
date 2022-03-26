@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://sprites/heart.png" type="Texture" id=1]
 [ext_resource path="res://Heart.cs" type="Script" id=2]
+[ext_resource path="res://music/heal.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 11.0
 
-[node name="Node2D" type="Node2D"]
+[node name="Heart" type="Node2D"]
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource( 2 )
@@ -18,5 +19,8 @@ texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="Area2D"]
+stream = ExtResource( 3 )
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_Area2D_body_entered"]

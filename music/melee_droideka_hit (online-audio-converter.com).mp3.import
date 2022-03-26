@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/melee_droideka_hit (online-audio-converter.com).mp3-207858ab09cdc8d401ce407988a95032.mp3str"
+
+[deps]
+
+source_file="res://music/melee_droideka_hit (online-audio-converter.com).mp3"
+dest_files=[ "res://.import/melee_droideka_hit (online-audio-converter.com).mp3-207858ab09cdc8d401ce407988a95032.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

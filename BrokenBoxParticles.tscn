@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://music/box_breaking.mp3" type="AudioStream" id=1]
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+amount = 30
+explosiveness = 0.6
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+initial_velocity = 100.0
+scale_amount = 5.0
+color = Color( 0.627451, 0.282353, 0, 1 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+autoplay = true

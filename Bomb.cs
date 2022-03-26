@@ -39,7 +39,7 @@ public class Bomb : RigidBody2D
 	// 		//goals.Append other as Player;
 	// 	}
 	// }
-	private void OnTimeToDie(){
+	public void OnTimeToDie(){
 		Boom boom = (Boom)boomScene.Instance();
 		boom.Position = sprite.GlobalPosition;
 		GetParent<KinematicBody2D>().GetParent<Node2D>().AddChild(boom);

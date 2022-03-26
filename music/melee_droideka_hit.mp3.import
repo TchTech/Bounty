@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/melee_droideka_hit.mp3-8ef9090bf8a1d40821c2c3dba07cc586.mp3str"
+
+[deps]
+
+source_file="res://music/melee_droideka_hit.mp3"
+dest_files=[ "res://.import/melee_droideka_hit.mp3-8ef9090bf8a1d40821c2c3dba07cc586.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
