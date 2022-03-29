@@ -13,6 +13,7 @@ public class Melee_Droideka : Playable
 	private bool is_player_in_area = false;
 	private bool allow_attack = true;
 	private Vector2 velocity;
+	private Vector2 lastVelocity;
 	private bool is_protecting = false;
 	private Timer protect_timer;
 	private Timer turn_off_protect_timer;
@@ -30,6 +31,7 @@ public class Melee_Droideka : Playable
 		protect_timer.Connect("timeout", this, nameof(Protect));
 		turn_off_protect_timer.Connect("timeout", this, nameof(turnOffProtect));
 		protect_timer.Start();
+		lastVelocity = Vector2.Zero;
 	}
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 	public void Protect(){
@@ -44,10 +46,13 @@ public class Melee_Droideka : Playable
 	}
 	public override void _Process(float delta)
 	{
+		if(lastVelocity.x>0)lastVelocity = new Vector2(lastVelocity.x-1, lastVelocity.y);
+		else lastVelocity = Vector2.Zero;
 		velocity = Vector2.Zero;
 		if(is_player_in_area && !Stun){
 			if(Math.Abs(player.Position.x - Position.x) > 50 && !Stun){
 				velocity = Position.DirectionTo(player.Position) * run_speed;
+				lastVelocity = velocity;
 				animatedSprite.Play("Spin");
 			}else if(allow_attack && !Stun){
 				Timer timer = new Timer();
@@ -72,7 +77,7 @@ public class Melee_Droideka : Playable
 		if(health < 100){
 			progBarHealth.Visible = true;
 		}
-		velocity.y += 9000 * delta;
+		velocity.y += 15000 * delta;
 		velocity = MoveAndSlide(velocity, Vector2.Up);
 		progBarHealth.Value = health;
 	}
@@ -91,6 +96,7 @@ public class Melee_Droideka : Playable
 	}
 	public override void Die(){
 		GetNode<CPUParticles2D>("DiedParticles").Emitting = true;
+		GetNode<AudioStreamPlayer2D>("DiedSound").Play();
 		Stun = true;
 		Timer timer = new Timer();
 		this.AddChild(timer);
@@ -111,6 +117,7 @@ public class Melee_Droideka : Playable
 	public void Attack(){
 		if(allow_attack && Math.Abs(player.Position.y - Position.y)<50 && Math.Abs(player.Position.x - Position.x) < 50){
 			player.Hurt(20);
+			GetNode<AudioStreamPlayer2D>("HitSound").Play();
 			animatedSprite.Play("Attack");
 		}
 		Timer timer = new Timer();

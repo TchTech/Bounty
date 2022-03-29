@@ -11,5 +11,5 @@ dest_files=[ "res://.import/burn_it_all.mp3-63c19d373da8c93ea4372709634985a6.mp3
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Player.cs" type="Script" id=1]
 [ext_resource path="res://sprites/boba sprites/go1_player.png" type="Texture" id=2]
@@ -25,26 +25,29 @@
 [ext_resource path="res://music/boba/come_closer.mp3" type="AudioStream" id=23]
 [ext_resource path="res://sprites/rocket-image.png" type="Texture" id=24]
 [ext_resource path="res://sprites/bomb-icon.png" type="Texture" id=25]
+[ext_resource path="res://music/flamethrowing.mp3" type="AudioStream" id=26]
+[ext_resource path="res://sprites/rocket-icon.png" type="Texture" id=27]
+[ext_resource path="res://music/boba/challenge_me.mp3" type="AudioStream" id=28]
+[ext_resource path="res://music/boba/die.mp3" type="AudioStream" id=29]
+[ext_resource path="res://music/boba/stay_out_of_my_way.mp3" type="AudioStream" id=30]
+[ext_resource path="res://music/boba/let_me_work.mp3" type="AudioStream" id=31]
+[ext_resource path="res://music/boba/too_slow.mp3" type="AudioStream" id=32]
+[ext_resource path="res://music/boba/burn_it_all.mp3" type="AudioStream" id=33]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.625, 22.25 )
 
 [sub_resource type="SpriteFrames" id=8]
 animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "Run",
+"speed": 8.5
+}, {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "Fier",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "Stand",
-"speed": 4.0
-}, {
-"frames": [ ExtResource( 15 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 14 ) ],
-"loop": false,
-"name": "Shot",
-"speed": 12.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 16 ), ExtResource( 11 ) ],
 "loop": true,
@@ -56,10 +59,15 @@ animations = [ {
 "name": "FlyShot",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 13 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 7 ) ],
 "loop": true,
-"name": "Run",
-"speed": 8.5
+"name": "Stand",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "Shot",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 17 ) ],
 "loop": true,
@@ -179,7 +187,7 @@ __meta__ = {
 [node name="MiniRocketArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MiniRocketArea"]
-position = Vector2( 1, -1 )
+position = Vector2( 0, 1 )
 shape = SubResource( 14 )
 
 [node name="MiniRocketTimer" type="Timer" parent="."]
@@ -195,3 +203,41 @@ texture = ExtResource( 24 )
 position = Vector2( 267, -167 )
 scale = Vector2( 0.2225, 0.2225 )
 texture = ExtResource( 25 )
+
+[node name="FlameTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="FlameSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 26 )
+volume_db = 3.0
+
+[node name="RocketTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="RocketImage" type="Sprite" parent="."]
+position = Vector2( 165, -162 )
+scale = Vector2( 1.5375, 1.5125 )
+texture = ExtResource( 27 )
+
+[node name="BurnItAll" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 33 )
+
+[node name="ChallengeMe" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 28 )
+
+[node name="LetMeWork" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 31 )
+
+[node name="StayOutOfMyWay" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 30 )
+
+[node name="ComeCloser" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 23 )
+
+[node name="DieVoice" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 29 )
+
+[node name="TooSlow" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 32 )

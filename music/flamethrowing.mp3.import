@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/flamethrowing.mp3-a0127f2dffc1b222ac7b993078a84be8.mp3str"
+
+[deps]
+
+source_file="res://music/flamethrowing.mp3"
+dest_files=[ "res://.import/flamethrowing.mp3-a0127f2dffc1b222ac7b993078a84be8.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

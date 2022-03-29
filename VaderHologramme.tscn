@@ -10,6 +10,16 @@
 [ext_resource path="res://music/lightsaber.wav" type="AudioStream" id=8]
 [ext_resource path="res://music/no_escape.wav" type="AudioStream" id=9]
 
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 48, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 16, 48, 16, 24 )
+
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 1 )
@@ -24,16 +34,6 @@ region = Rect2( 48, 24, 16, 24 )
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 80, 48, 16, 24 )
-
-[sub_resource type="AtlasTexture" id=10]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 48, 16, 24 )
-
-[sub_resource type="AtlasTexture" id=11]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 16, 48, 16, 24 )
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -52,11 +52,6 @@ region = Rect2( 112, 0, 16, 24 )
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
-"loop": false,
-"name": "Attack",
-"speed": 8.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "Hurt",
@@ -66,6 +61,11 @@ animations = [ {
 "loop": true,
 "name": "Stun",
 "speed": 7.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": false,
+"name": "Attack",
+"speed": 8.0
 }, {
 "frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
@@ -153,6 +153,7 @@ volume_db = 5.0
 
 [node name="youwillknowthepower" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
+volume_db = 24.0
 
 [node name="noescape" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 9 )

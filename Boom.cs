@@ -1,28 +1,24 @@
 using Godot;
 using System;
 
-public class Boom : RigidBody2D
+public class Boom : Projectiles
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        
-    }
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
-    public void _on_Area2D_body_entered(object other){
-        if(other is Playable){
-            var pl = other as Playable;
-            pl.Hurt(50);
-        }
-        Console.WriteLine("zzz");
-    }
+	public override void _Ready()
+	{
+		Timer timer = new Timer();
+		timer.WaitTime = 0.5f;
+		timer.OneShot = true;
+		AddChild(timer);
+		timer.Connect("timeout",this,nameof(Destroy));
+		timer.Start();
+	}
+	public void _on_Area2D_body_entered(object other){
+		if(other is Playable){
+			var pl = other as Playable;
+			pl.Hurt(75);
+		}
+	}
+	private void Destroy(){
+		QueueFree();
+	}
 }

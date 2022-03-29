@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://sprites/droid/attack_droid1.png" type="Texture" id=1]
 [ext_resource path="res://sprites/droid/respin1_droid.png" type="Texture" id=2]
@@ -11,7 +11,9 @@
 [ext_resource path="res://sprites/droid/spin_droid0.png" type="Texture" id=9]
 [ext_resource path="res://sprites/droid/shield_droid1.png" type="Texture" id=10]
 [ext_resource path="res://sprites/droid/attack_droid2.png" type="Texture" id=11]
-[ext_resource path="res://Melee_Droideka.cs" type="Script" id=12]
+[ext_resource path="res://Shot_Droideka.cs" type="Script" id=12]
+[ext_resource path="res://music/droideka_shot.mp3" type="AudioStream" id=13]
+[ext_resource path="res://music/droideka_malfunction.wav" type="AudioStream" id=14]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -25,14 +27,14 @@ animations = [ {
 "name": "Spin",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 2 ) ],
-"loop": false,
-"name": "Respin",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 6 ), ExtResource( 10 ) ],
 "loop": false,
 "name": "Shield",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "Respin",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ) ],
@@ -42,10 +44,11 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=6]
-radius = 17.0
+radius = 18.0
+height = 12.0
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 184.75, 85.75 )
+extents = Vector2( 360.594, 149.438 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0, 1, 1, 1 )
@@ -61,7 +64,7 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 
-[node name="Droideka" type="KinematicBody2D"]
+[node name="Shot_Droideka" type="KinematicBody2D"]
 script = ExtResource( 12 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -94,6 +97,42 @@ percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="DiedParticles" type="CPUParticles2D" parent="."]
+position = Vector2( 7, -11 )
+emitting = false
+amount = 45
+emission_shape = 3
+emission_points = PoolVector2Array(  )
+emission_colors = PoolColorArray(  )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 100.0
+scale_amount = 2.5
+color = Color( 0.513726, 0.513726, 0.513726, 1 )
+
+[node name="ShieldParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+emission_shape = 1
+emission_sphere_radius = 50.0
+orbit_velocity = 9.0
+scale_amount = 5.0
+color = Color( 0.0313726, 0, 1, 1 )
+
+[node name="ProtectTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="TurnOffProtectTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="ShotSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )
+
+[node name="DiedSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 14 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

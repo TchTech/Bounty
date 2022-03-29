@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/droideka_shot.mp3-18f65880448469ed5458cbce82e58b2b.mp3str"
+
+[deps]
+
+source_file="res://music/droideka_shot.mp3"
+dest_files=[ "res://.import/droideka_shot.mp3-18f65880448469ed5458cbce82e58b2b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

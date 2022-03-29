@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://sprites/bomb_fire3.png" type="Texture" id=1]
 [ext_resource path="res://sprites/bomb_fire1.png" type="Texture" id=2]
 [ext_resource path="res://sprites/bomb_fire2.png" type="Texture" id=3]
 [ext_resource path="res://Boom.cs" type="Script" id=4]
+[ext_resource path="res://music/boom.mp3" type="AudioStream" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 66.0076
@@ -36,7 +37,7 @@ position = Vector2( -1.90735e-06, -1.90735e-06 )
 scale = Vector2( 1.33158, 1.31136 )
 frames = SubResource( 2 )
 animation = "Explosion"
-frame = 4
+frame = 2
 playing = true
 
 [node name="ExplCPUParticles2D" type="CPUParticles2D" parent="Area2D"]
@@ -53,5 +54,9 @@ color_ramp = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 4 )
+
+[node name="ExplSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
