@@ -54,7 +54,7 @@ public class Shot_Droideka : Playable
 			}else if(allow_attack && !Stun){
 				Timer timer = new Timer();
 				this.AddChild(timer);
-				timer.WaitTime = 0.5f;
+				timer.WaitTime = 0.2f;
 				timer.OneShot = true;
 				timer.Connect("timeout", this, nameof(Attack));
 				timer.Start();
@@ -122,7 +122,7 @@ public class Shot_Droideka : Playable
 				bullet.Position = new Vector2(animatedSprite.Position.x-55, animatedSprite.Position.y);
 			}
 		 	this.AddChild(bullet);
-		 	bullet.LaunchBullet();
+		 	bullet.LaunchBullet(10);
 			GetNode<AudioStreamPlayer2D>("ShotSound").Play();
 			animatedSprite.Play("Attack");
 		}

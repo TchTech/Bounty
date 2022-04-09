@@ -1,37 +1,20 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://sprites/bomb.png" type="Texture" id=1]
 [ext_resource path="res://Bomb.cs" type="Script" id=2]
-[ext_resource path="res://sprites/bomb_fire2.png" type="Texture" id=3]
-[ext_resource path="res://sprites/bomb_fire3.png" type="Texture" id=4]
-[ext_resource path="res://sprites/bomb_fire1.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 9.05539
 
-[sub_resource type="SpriteFrames" id=2]
-animations = [ {
-"frames": [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ) ],
-"loop": false,
-"name": "Explosion",
-"speed": 10.0
-} ]
-
 [node name="RigidBody2D" type="RigidBody2D"]
 position = Vector2( 1, 0 )
+gravity_scale = 3.0
 contacts_reported = 5
 contact_monitor = true
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-visible = false
-position = Vector2( 2.38419e-07, 2.38419e-07 )
-scale = Vector2( 0.70866, 0.7767 )
-frames = SubResource( 2 )
-animation = "Explosion"
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 1.90735e-06, 0 )

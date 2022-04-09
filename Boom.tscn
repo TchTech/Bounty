@@ -37,7 +37,7 @@ position = Vector2( -1.90735e-06, -1.90735e-06 )
 scale = Vector2( 1.33158, 1.31136 )
 frames = SubResource( 2 )
 animation = "Explosion"
-frame = 2
+frame = 1
 playing = true
 
 [node name="ExplCPUParticles2D" type="CPUParticles2D" parent="Area2D"]

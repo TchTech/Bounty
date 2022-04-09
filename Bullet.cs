@@ -6,6 +6,7 @@ public class Bullet : Projectiles
 	public float MaxDistance = 800; // How far (in pixels) the bullet will travel before it is destroyed
 	public float MaxSeconds = 1;    // How long (in seconds) before the bullet is destroyed
 	public float ImpulseMag = 2000;
+	public int Damage; 
 	private Playable goal;
 	private Vector2 originalPos;
 	public override void _Ready()
@@ -14,10 +15,11 @@ public class Bullet : Projectiles
 	private void OnTimeToDie(){
 		this.QueueFree();
 	}
-	public void LaunchBullet(){
-		this.originalPos = this.Position; // save the position the bullet was launched from
-		this.ApplyCentralImpulse(this.Transform.x.Normalized() * this.ImpulseMag); // apply an impulse in the same direction that the bullet is facing
+	public void LaunchBullet(int dmg){
+		originalPos = Position; // save the position the bullet was launched from
+		ApplyCentralImpulse(Transform.x.Normalized() * ImpulseMag); // apply an impulse in the same direction that the bullet is facing
 		// start a timer that will delete the bullet when it has lived long enough
+		Damage = dmg;
 		Timer timer = new Timer();
 		this.AddChild(timer);
 		timer.WaitTime = this.MaxSeconds;
@@ -32,7 +34,7 @@ public class Bullet : Projectiles
 		else if(GetCollidingBodies().Count>0){
 			if(GetCollidingBodies()[0] is Playable){
 				goal = GetCollidingBodies()[0] as Playable;
-				goal.Hurt(20);
+				goal.Hurt(Damage);
 			}
 			this.QueueFree();
 		}
