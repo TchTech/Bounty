@@ -9,7 +9,7 @@ public class Coin : Area2D
 			if(kbody.Name == "Player" && Visible){
 				GetNode<AudioStreamPlayer2D>("Sound").Play();
 				var player = kbody as Player;
-				player.Money += 1;
+				player.money += 1;
 				Timer timer = new Timer();
 				this.AddChild(timer);
 				timer.WaitTime = 2.0f;
@@ -17,7 +17,7 @@ public class Coin : Area2D
 				timer.Connect("timeout", this, nameof(Destroy));
 				timer.Start();
 				Visible = false;
-				player.AddFuel(20);
+				if(player.fuel<100)player.fuel += 20;
 			}
 		}
 		Console.WriteLine(body);

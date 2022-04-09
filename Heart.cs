@@ -17,7 +17,7 @@ public class Heart : Area2D
 				timer.Connect("timeout", this, nameof(Destroy));
 				timer.Start();
 				Visible = false;
-				player.AddFuel(20);
+				if(player.fuel<100)player.fuel += 20;
 			}
 		}
 		Console.WriteLine(body);

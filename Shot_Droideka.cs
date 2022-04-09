@@ -74,7 +74,7 @@ public class Shot_Droideka : Playable
 		if(health < 100){
 			progBarHealth.Visible = true;
 		}
-		velocity.y += 15000 * delta;
+		velocity.y += 9000 * delta;
 		velocity = MoveAndSlide(velocity, Vector2.Up);
 		progBarHealth.Value = health;
 	}
