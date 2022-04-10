@@ -123,6 +123,9 @@ public class Player : Playable
 		FlameRestartTimer = GetNode<Timer>("FlameRestartTimer");
 		FlameTimer.Connect("timeout", this, nameof(turnOffFlame));
 		FlameRestartTimer.Connect("timeout", this, nameof(RestartFlame));
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 	}
 private void RestartFlame(){
@@ -225,6 +228,7 @@ public override void _Process(float delta)
 		miniRocketImage.Texture = GD.Load<Texture>("res://sprites/rocket-disabled-image.png");
 	}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	if(Input.IsActionPressed("shot") && shot_timer.Elapsed.Milliseconds==0){
 		 
 		 Bullet bullet = (Bullet)bulletScene.Instance();
@@ -237,6 +241,8 @@ public override void _Process(float delta)
 		 shot_timer.Start();
 		 is_shot = true;
 =======
+=======
+>>>>>>> Stashed changes
 	if(Input.IsActionPressed("shot") && ShotTimer.Elapsed.Milliseconds==0){
 		 Bullet bullet = (Bullet)BulletScene.Instance();
 		 bullet.Position = new Vector2(AnimatedSprite.Position.x+(35*LastDirection), AnimatedSprite.Position.y-1-(Convert.ToInt32(!IsOnFloor()) * 10));
@@ -257,6 +263,7 @@ public override void _Process(float delta)
 		 is_shot = false;
 	 }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	if(Input.IsActionPressed("flame") && !is_flaming){
 		flame = (FlameArea)GD.Load<PackedScene>("res://Flame.tscn").Instance();
 		if(last_direction == -1){
@@ -264,6 +271,8 @@ public override void _Process(float delta)
 			flame.GetNode<CPUParticles2D>("CPUParticles2D").Position = new Vector2(74, 2);
 			flame.GetNode<CPUParticles2D>("CPUParticles2D").Rotation = Mathf.Deg2Rad(180);
 =======
+=======
+>>>>>>> Stashed changes
 	if(Input.IsActionPressed("flame") && !IsFlaming && FlameFuel>0){
 		Flame = (FlameArea)GD.Load<PackedScene>("res://Flame.tscn").Instance();
 		if(LastDirection == -1){
