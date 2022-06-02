@@ -17,6 +17,16 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "Respin",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 10 ) ],
+"loop": false,
+"name": "Shield",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 8 ), ExtResource( 1 ), ExtResource( 11 ), ExtResource( 7 ) ],
 "loop": false,
 "name": "Attack",
@@ -27,28 +37,14 @@ animations = [ {
 "name": "Spin",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 10 ) ],
-"loop": false,
-"name": "Shield",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 2 ) ],
-"loop": false,
-"name": "Respin",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=6]
-radius = 18.0
-height = 12.0
-
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 360.594, 149.438 )
+extents = Vector2( 353.188, 102.875 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0, 1, 1, 1 )
@@ -64,6 +60,10 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 12.0
+height = 24.0
+
 [node name="Shot_Droideka" type="KinematicBody2D"]
 script = ExtResource( 12 )
 
@@ -73,10 +73,6 @@ frames = SubResource( 1 )
 animation = "Idle"
 playing = true
 offset = Vector2( -10, 0 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1, -2 )
-shape = SubResource( 6 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -133,6 +129,9 @@ stream = ExtResource( 13 )
 
 [node name="DiedSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 6 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

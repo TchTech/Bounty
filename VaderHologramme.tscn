@@ -10,16 +10,6 @@
 [ext_resource path="res://music/lightsaber.wav" type="AudioStream" id=8]
 [ext_resource path="res://music/no_escape.wav" type="AudioStream" id=9]
 
-[sub_resource type="AtlasTexture" id=10]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 48, 16, 24 )
-
-[sub_resource type="AtlasTexture" id=11]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 16, 48, 16, 24 )
-
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 1 )
@@ -34,6 +24,16 @@ region = Rect2( 48, 24, 16, 24 )
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 80, 48, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 48, 16, 24 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 16, 48, 16, 24 )
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -57,15 +57,15 @@ animations = [ {
 "name": "Hurt",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 10 ), SubResource( 11 ) ],
-"loop": true,
-"name": "Stun",
-"speed": 7.0
-}, {
 "frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": false,
 "name": "Attack",
 "speed": 8.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "Stun",
+"speed": 7.0
 }, {
 "frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
@@ -153,7 +153,6 @@ volume_db = 5.0
 
 [node name="youwillknowthepower" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
-volume_db = 24.0
 
 [node name="noescape" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 9 )
@@ -167,8 +166,12 @@ margin_bottom = -28.0
 rect_clip_content = true
 custom_styles/fg = SubResource( 12 )
 custom_styles/bg = SubResource( 13 )
+max_value = 1000.0
 value = 50.0
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

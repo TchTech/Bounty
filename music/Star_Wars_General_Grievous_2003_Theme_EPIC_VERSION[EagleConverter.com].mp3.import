@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Star_Wars_General_Grievous_2003_Theme_EPIC_VERSION[EagleConverter.com].mp3-d029186e59c7844b86801671857d1888.mp3str"
+
+[deps]
+
+source_file="res://music/Star_Wars_General_Grievous_2003_Theme_EPIC_VERSION[EagleConverter.com].mp3"
+dest_files=[ "res://.import/Star_Wars_General_Grievous_2003_Theme_EPIC_VERSION[EagleConverter.com].mp3-d029186e59c7844b86801671857d1888.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

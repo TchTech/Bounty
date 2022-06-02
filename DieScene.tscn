@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/died/DiedBoba.png" type="Texture" id=1]
+[ext_resource path="res://sprites/died/b487c449da1dd74.png" type="Texture" id=2]
+[ext_resource path="res://DieScene.cs" type="Script" id=3]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bg" type="TextureRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 1024.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BobaFett" type="TextureRect" parent="."]
+margin_left = 408.0
+margin_top = 16.0
+margin_right = 872.0
+margin_bottom = 448.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 456.0
+margin_top = 416.0
+margin_right = 556.0
+margin_bottom = 516.0
+rect_scale = Vector2( 5, 5 )
+custom_colors/default_color = Color( 1, 0, 0, 1 )
+custom_colors/selection_color = Color( 1, 0, 0, 1 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+text = "You Lose!
+Try Again!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 464.0
+margin_top = 656.0
+margin_right = 816.0
+margin_bottom = 728.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Button"]
+margin_left = 120.0
+margin_top = 8.0
+margin_right = 150.0
+margin_bottom = 24.0
+rect_scale = Vector2( 4, 4 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_colors/selection_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

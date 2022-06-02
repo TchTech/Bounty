@@ -23,9 +23,9 @@ public class Shot_Droideka : Playable
 		progBarHealth = GetNode<ProgressBar>("Health");
 		player = new Player();
 		animatedSprite.Play();
-		health = 100;
+		Health = 100;
 		progBarHealth.Visible = false;
-		maxHealth = health;
+		MaxHealth = Health;
 		protect_timer = GetNode<Timer>("ProtectTimer");
 		turn_off_protect_timer = GetNode<Timer>("TurnOffProtectTimer");
 		protect_timer.Connect("timeout", this, nameof(Protect));
@@ -54,7 +54,7 @@ public class Shot_Droideka : Playable
 			}else if(allow_attack && !Stun){
 				Timer timer = new Timer();
 				this.AddChild(timer);
-				timer.WaitTime = 0.5f;
+				timer.WaitTime = 0.2f;
 				timer.OneShot = true;
 				timer.Connect("timeout", this, nameof(Attack));
 				timer.Start();
@@ -71,12 +71,12 @@ public class Shot_Droideka : Playable
 		if(is_stun){
 			velocity = Vector2.Zero;
 		}
-		if(health < 100){
+		if(Health < 100){
 			progBarHealth.Visible = true;
 		}
-		velocity.y += 15000 * delta;
+		velocity.y += 9000 * delta;
 		velocity = MoveAndSlide(velocity, Vector2.Up);
-		progBarHealth.Value = health;
+		progBarHealth.Value = Health;
 	}
 	private void _on_Area2D_body_entered(object body)
 	{
@@ -122,7 +122,7 @@ public class Shot_Droideka : Playable
 				bullet.Position = new Vector2(animatedSprite.Position.x-55, animatedSprite.Position.y);
 			}
 		 	this.AddChild(bullet);
-		 	bullet.LaunchBullet();
+		 	bullet.LaunchBullet(10);
 			GetNode<AudioStreamPlayer2D>("ShotSound").Play();
 			animatedSprite.Play("Attack");
 		}

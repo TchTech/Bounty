@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tches\\Documents\\Bounty\\Bounty Hunter.csproj": {}
+    "C:\\Users\\tches\\Desktop\\Bounty\\Bounty Hunter.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tches\\Documents\\Bounty\\Bounty Hunter.csproj": {
+    "C:\\Users\\tches\\Desktop\\Bounty\\Bounty Hunter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tches\\Documents\\Bounty\\Bounty Hunter.csproj",
+        "projectUniqueName": "C:\\Users\\tches\\Desktop\\Bounty\\Bounty Hunter.csproj",
         "projectName": "Bounty Hunter",
-        "projectPath": "C:\\Users\\tches\\Documents\\Bounty\\Bounty Hunter.csproj",
+        "projectPath": "C:\\Users\\tches\\Desktop\\Bounty\\Bounty Hunter.csproj",
         "packagesPath": "C:\\Users\\tches\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tches\\Documents\\Bounty\\.mono\\temp\\obj\\",
+        "outputPath": "C:\\Users\\tches\\Desktop\\Bounty\\.mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tches\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -23,9 +23,9 @@ public class Melee_Droideka : Playable
 		progBarHealth = GetNode<ProgressBar>("Health");
 		player = new Player();
 		animatedSprite.Play();
-		health = 100;
+		Health = 100;
 		progBarHealth.Visible = false;
-		maxHealth = health;
+		MaxHealth = Health;
 		protect_timer = GetNode<Timer>("ProtectTimer");
 		turn_off_protect_timer = GetNode<Timer>("TurnOffProtectTimer");
 		protect_timer.Connect("timeout", this, nameof(Protect));
@@ -74,12 +74,12 @@ public class Melee_Droideka : Playable
 		if(is_stun){
 			velocity = Vector2.Zero;
 		}
-		if(health < 100){
+		if(Health < 100){
 			progBarHealth.Visible = true;
 		}
 		velocity.y += 15000 * delta;
 		velocity = MoveAndSlide(velocity, Vector2.Up);
-		progBarHealth.Value = health;
+		progBarHealth.Value = Health;
 	}
 	private void _on_Area2D_body_entered(object body)
 	{

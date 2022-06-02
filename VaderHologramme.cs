@@ -22,8 +22,8 @@ public class VaderHologramme : Playable
 		deadScene = GD.Load<PackedScene>("res://DeadParticles.tscn");
 		redParticles.Visible = false;
 		progBarHealth = GetNode<ProgressBar>("Health");
-		health = 100;
-		maxHealth = health;
+		Health = 1000;
+		MaxHealth = Health;
 		progBarHealth.Visible = false;
 	}
 	public override void _Process(float delta){
@@ -54,12 +54,12 @@ public class VaderHologramme : Playable
 		if(is_stun){
 			velocity = Vector2.Zero;
 		}
-		if(health < 100){
+		if(Health < 1000){
 			progBarHealth.Visible = true;
 		}
 		velocity.y += 9000 * delta;
 		velocity = MoveAndSlide(velocity, Vector2.Up);
-		progBarHealth.Value = health;
+		progBarHealth.Value = Health;
 		
 	}
 	public void _on_Area2D_body_entered(object other){

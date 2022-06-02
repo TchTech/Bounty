@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/grievous_coughing.mp3-04a79e1a9757749d1159953998ae2c2a.mp3str"
+
+[deps]
+
+source_file="res://music/grievous_coughing.mp3"
+dest_files=[ "res://.import/grievous_coughing.mp3-04a79e1a9757749d1159953998ae2c2a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

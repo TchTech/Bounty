@@ -1,0 +1,9 @@
+C:\Users\User\Desktop\Bounty\.mono\temp\bin\ExportDebug\Bounty Hunter.dll
+C:\Users\User\Desktop\Bounty\.mono\temp\bin\ExportDebug\Bounty Hunter.pdb
+C:\Users\User\Desktop\Bounty\.mono\temp\obj\ExportDebug\Bounty Hunter.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Bounty\.mono\temp\obj\ExportDebug\Bounty Hunter.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\Bounty\.mono\temp\obj\ExportDebug\Bounty Hunter.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Bounty\.mono\temp\obj\ExportDebug\Bounty Hunter.AssemblyInfo.cs
+C:\Users\User\Desktop\Bounty\.mono\temp\obj\ExportDebug\Bounty Hunter.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Bounty\.mono\temp\obj\ExportDebug\Bounty Hunter.dll
+C:\Users\User\Desktop\Bounty\.mono\temp\obj\ExportDebug\Bounty Hunter.pdb

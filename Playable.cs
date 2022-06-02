@@ -3,23 +3,23 @@ using System;
 
 public class Playable : KinematicBody2D
 {
-	public int maxHealth;
-	public int health;
+	public int MaxHealth;
+	public int Health;
 	public virtual void Die(){
 		QueueFree();
 	}
 	public virtual void Heal(int heal){
-		if(maxHealth>=heal+health){
-			health += heal;
+		if(MaxHealth>=heal+Health){
+			Health += heal;
 		}else{
-			health = maxHealth;
+			Health = MaxHealth;
 		}
 		
 	}
 	public virtual void Hurt(int damage){
-		health -= damage;
-		Console.WriteLine(health.ToString());
-		if(health <= 0){
+		Health -= damage;
+		Console.WriteLine(Health.ToString());
+		if(Health <= 0){
 			Die();
 		}
 	}

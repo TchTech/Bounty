@@ -1,0 +1,107 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://sprites/GrievousSprites/idle (2).png" type="Texture" id=1]
+[ext_resource path="res://sprites/GrievousSprites/dash.png" type="Texture" id=2]
+[ext_resource path="res://sprites/GrievousSprites/walk3.png" type="Texture" id=3]
+[ext_resource path="res://sprites/GrievousSprites/walk0.png" type="Texture" id=4]
+[ext_resource path="res://sprites/GrievousSprites/walk1.png" type="Texture" id=5]
+[ext_resource path="res://sprites/GrievousSprites/dash2.png" type="Texture" id=6]
+[ext_resource path="res://sprites/GrievousSprites/dash1.png" type="Texture" id=7]
+[ext_resource path="res://sprites/GrievousSprites/dash0.png" type="Texture" id=8]
+[ext_resource path="res://GrievousHologram.cs" type="Script" id=9]
+[ext_resource path="res://sprites/GrievousSprites/spin_attack3.png" type="Texture" id=10]
+[ext_resource path="res://sprites/GrievousSprites/spin_attack2.png" type="Texture" id=11]
+[ext_resource path="res://music/grievous_coughing.mp3" type="AudioStream" id=12]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 11 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "Spin",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "Dash",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "Go",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "Idle",
+"speed": 0.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 214, 86 )
+
+[sub_resource type="Curve" id=5]
+max_value = 10.0
+_data = [ Vector2( 0, 1.36364 ), 0.0, 0.0, 0, 0, Vector2( 0.626761, 10 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.181818 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=6]
+colors = PoolColorArray( 1, 0, 0, 1, 1, 0.914063, 0, 1 )
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+script = ExtResource( 9 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -7.62939e-06, 24 )
+scale = Vector2( 1.18908, 1 )
+frames = SubResource( 2 )
+animation = "Idle"
+playing = true
+centered = false
+offset = Vector2( -20, -55 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 5, 16, 23, 16, 16, 8, 24, 0, 24, -16, -8, -16, -16, 0, -8, 8, -7, 16 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 4 )
+
+[node name="SpinTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+show_behind_parent = true
+points = PoolVector2Array( -280, 0, 0, 0 )
+width_curve = SubResource( 5 )
+default_color = Color( 1, 0, 0, 1 )
+gradient = SubResource( 6 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 35
+emission_shape = 2
+emission_rect_extents = Vector2( 20, 30 )
+spread = 180.0
+gravity = Vector2( 0, 30 )
+radial_accel = 100.0
+scale_amount = 1.5
+color = Color( 0.472656, 0.830117, 1, 1 )
+
+[node name="HitParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+one_shot = true
+randomness = 1.0
+direction = Vector2( 1, 1 )
+spread = 180.0
+initial_velocity = 128.0
+scale_amount = 2.0
+color = Color( 0.611765, 0, 0.631373, 1 )
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+volume_db = 1.5
