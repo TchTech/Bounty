@@ -1,5 +1,11 @@
 # Bounty Hunter: Пиксельное приключение в стиле "Звёздных войн"
 
+<div>
+   <img src='readme resources/a.png' style='display: block' width='45%'/>
+   <img src='readme resources/b.png'  style='display: block' width='45%'/>
+</div>
+
+[![Геймплей](https://img.shields.io/badge/%D0%93%D0%B5%D0%B9%D0%BC%D0%BF%D0%BB%D0%B5%D0%B9-смотреть%20видео-blueviolet)](https://drive.google.com/file/d/13XMqmL4keKrIMGeMNMRqIlqafLM6cQcT/view?usp=sharing)
 
 **Взрывай их, выслеживай их, доставляй их - живыми или мертвыми!**
 
