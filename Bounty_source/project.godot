@@ -53,6 +53,10 @@ jetpack_rocket={
  ]
 }
 
+[mono]
+
+project/assembly_name="Bounty Hunter"
+
 [physics]
 
 common/enable_pause_aware_picking=true
